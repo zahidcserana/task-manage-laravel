@@ -1,17 +1,18 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Grades;
 
-use App\Models\User;
+use App\Models\Grade;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\Str;
 
-class UserSchema extends Schema
+class GradeSchema extends Schema
 {
 
     /**
@@ -19,7 +20,7 @@ class UserSchema extends Schema
      *
      * @var string
      */
-    public static string $model = User::class;
+    public static string $model = Grade::class;
 
     /**
      * Get the resource fields.
@@ -30,10 +31,10 @@ class UserSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
-            Str::make('email'),
-            Str::make('password'),
-            Str::make('password_confirmation'),
+            Str::make('code'),
+            Str::make('title'),
+            BelongsTo::make('institute'),
+
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];
@@ -60,5 +61,4 @@ class UserSchema extends Schema
     {
         return PagePagination::make();
     }
-
 }

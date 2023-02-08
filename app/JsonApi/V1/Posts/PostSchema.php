@@ -51,6 +51,10 @@ class PostSchema extends Schema
             BelongsToMany::make('tags'),
             Str::make('title')->sortable(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
+
+            // Str::make('name')->readOnly(
+            //     static fn($request) => !$request->user()->isAdmin()
+            // )
         ];
     }
 

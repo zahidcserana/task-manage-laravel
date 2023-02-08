@@ -22,6 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
+    $server->resource('institutes', JsonApiController::class);
+    $server->resource('users', JsonApiController::class);
+    $server->resource('grades', JsonApiController::class);
+    $server->resource('guardians', JsonApiController::class);
+    $server->resource('students', JsonApiController::class);
+
     $server->resource('posts', JsonApiController::class)
         ->relationships(function ($relations) {
             $relations->hasOne('author')->readOnly();

@@ -1,17 +1,18 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Students;
 
-use App\Models\User;
+use App\Models\Student;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\Str;
 
-class UserSchema extends Schema
+class StudentSchema extends Schema
 {
 
     /**
@@ -19,7 +20,7 @@ class UserSchema extends Schema
      *
      * @var string
      */
-    public static string $model = User::class;
+    public static string $model = Student::class;
 
     /**
      * Get the resource fields.
@@ -30,10 +31,16 @@ class UserSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
-            Str::make('email'),
-            Str::make('password'),
-            Str::make('password_confirmation'),
+            Str::make('number'),
+            Str::make('name')->sortable(),
+            Str::make('email')->sortable(),
+            Str::make('mobile'),
+            Str::make('address'),
+            Str::make('remarks'),
+            BelongsTo::make('grade'),
+            BelongsTo::make('guardian'),
+            BelongsTo::make('institute'),
+
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

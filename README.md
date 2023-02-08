@@ -9,7 +9,32 @@ Task management
 
 ## Command
 
+php artisan jsonapi:server v1
+
 php artisan jsonapi:request posts
 
 php artisan jsonapi:schema tags
 
+artisan jsonapi:query posts --collection
+
+
+## Model sample
+
+php artisan make:model Institute --migration
+
+php artisan jsonapi:schema institutes
+
+php artisan make:policy InstitutePolicy --model Institute
+
+php artisan jsonapi:request institutes
+
+php artisan migrate
+
+## Models
+- User
+- Grade
+- Institute
+- Guardian
+-## Session
+-## Batch(SessionGrade)
+- Student(Batch)

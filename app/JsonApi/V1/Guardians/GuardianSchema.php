@@ -1,8 +1,8 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Guardians;
 
-use App\Models\User;
+use App\Models\Guardian;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -10,8 +10,9 @@ use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 
-class UserSchema extends Schema
+class GuardianSchema extends Schema
 {
 
     /**
@@ -19,7 +20,7 @@ class UserSchema extends Schema
      *
      * @var string
      */
-    public static string $model = User::class;
+    public static string $model = Guardian::class;
 
     /**
      * Get the resource fields.
@@ -30,10 +31,13 @@ class UserSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
-            Str::make('email'),
-            Str::make('password'),
-            Str::make('password_confirmation'),
+            Str::make('name')->sortable(),
+            Str::make('email')->sortable(),
+            Str::make('mobile'),
+            Str::make('profession'),
+            Str::make('address'),
+            BelongsTo::make('institute'),
+
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];
@@ -60,5 +64,4 @@ class UserSchema extends Schema
     {
         return PagePagination::make();
     }
-
 }

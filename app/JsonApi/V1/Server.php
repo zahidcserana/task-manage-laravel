@@ -3,7 +3,9 @@
 namespace App\JsonApi\V1;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
 
 class Server extends BaseServer
@@ -28,6 +30,10 @@ class Server extends BaseServer
         Post::creating(static function (Post $post): void {
             $post->author()->associate(Auth::user());
         });
+
+        User::creating(static function (User $user): void {
+            $user->password = Hash::make($user->password);
+        });
     }
 
     /**
@@ -42,6 +48,10 @@ class Server extends BaseServer
             Posts\PostSchema::class,
             Tags\TagSchema::class,
             Users\UserSchema::class,
+            Institutes\InstituteSchema::class,
+            Grades\GradeSchema::class,
+            Guardians\GuardianSchema::class,
+            Students\StudentSchema::class,
         ];
     }
 }
