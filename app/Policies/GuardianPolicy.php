@@ -16,7 +16,7 @@ class GuardianPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(?User $user)
+    public function viewAny(User $user)
     {
          return true;
     }
@@ -51,9 +51,13 @@ class GuardianPolicy
      * @param  \App\Models\Guardian  $guardian
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Guardian $guardian)
+    public function update(User $user, $data = null)
     {
-         return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return true;
     }
 
     /**
@@ -63,9 +67,11 @@ class GuardianPolicy
      * @param  \App\Models\Guardian  $guardian
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Guardian $guardian)
+    public function delete(User $user, $data = null)
     {
-         return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
     }
 
     /**

@@ -32,8 +32,6 @@ class UserSchema extends Schema
             ID::make(),
             Str::make('name'),
             Str::make('email'),
-            Str::make('password'),
-            Str::make('password_confirmation'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

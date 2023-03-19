@@ -2,7 +2,12 @@
 
 namespace App\JsonApi\V1;
 
+use App\Models\Batch;
+use App\Models\Grade;
+use App\Models\Guardian;
 use App\Models\Post;
+use App\Models\Session;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +39,22 @@ class Server extends BaseServer
         User::creating(static function (User $user): void {
             $user->password = Hash::make($user->password);
         });
+
+        Session::creating(static function (Session $session): void {
+            $session->institute_id = Auth::user()->institute_id;
+        });
+
+        Grade::creating(static function (Grade $grade): void {
+            $grade->institute_id = Auth::user()->institute_id;
+        });
+
+        Guardian::creating(static function (Guardian $guardian): void {
+            $guardian->institute_id = Auth::user()->institute_id;
+        });
+
+        Student::creating(static function (Student $student): void {
+            $student->institute_id = Auth::user()->institute_id;
+        });
     }
 
     /**
@@ -52,6 +73,8 @@ class Server extends BaseServer
             Grades\GradeSchema::class,
             Guardians\GuardianSchema::class,
             Students\StudentSchema::class,
+            Sessions\SessionSchema::class,
+            Batches\BatchSchema::class,
         ];
     }
 }

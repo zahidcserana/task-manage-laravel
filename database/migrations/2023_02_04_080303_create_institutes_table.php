@@ -27,8 +27,10 @@ return new class extends Migration
             $table->string('total_teachers')->nullable();
             $table->string('total_staff')->nullable();
             $table->string('total_students')->nullable();
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

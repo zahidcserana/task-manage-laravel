@@ -194,6 +194,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\BatchComponentServiceProvider::class,
+        \App\Providers\GradeComponentServiceProvider::class,
+        \App\Providers\GuardianComponentServiceProvider::class,
+        \App\Providers\StudentComponentServiceProvider::class,
+        \App\Providers\UserComponentServiceProvider::class,
+        \App\Providers\SessionComponentServiceProvider::class,
+        \App\Providers\InstituteComponentServiceProvider::class,
 
     ],
 

@@ -13,9 +13,11 @@ php artisan jsonapi:server v1
 
 php artisan jsonapi:request posts
 
-php artisan jsonapi:schema tags
+php artisan jsonapi:schema posts
 
-artisan jsonapi:query posts --collection
+php artisan make:policy InstitutePolicy --model Institute
+
+php artisan jsonapi:query posts --collection
 
 
 ## Model sample
@@ -38,3 +40,11 @@ php artisan migrate
 -## Session
 -## Batch(SessionGrade)
 - Student(Batch)
+-## InstituteUser
+
+
+## Current
+- Controllers, 
+- Components, 
+- Providers
+- deleted_at to all models

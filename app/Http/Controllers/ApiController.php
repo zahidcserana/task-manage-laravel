@@ -19,4 +19,20 @@ class ApiController extends Controller
 
         return $methods;
     }
+
+    public function success($message = '')
+    {
+        return [
+            'success' => true,
+            'message' => $message
+        ];
+    }
+
+    public function fail($error)
+    {
+        return [
+            'success' => false,
+            'error' => $error
+        ];
+    }
 }

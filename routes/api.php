@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
-use LaravelJsonApi\Laravel\Http\Controllers\JsonApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
-    $server->resource('institutes', JsonApiController::class);
-    $server->resource('users', JsonApiController::class);
-    $server->resource('grades', JsonApiController::class);
-    $server->resource('guardians', JsonApiController::class);
-    $server->resource('students', JsonApiController::class);
-
     $server->resource('posts', JsonApiController::class)
         ->relationships(function ($relations) {
             $relations->hasOne('author')->readOnly();
@@ -35,3 +28,20 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
             $relations->hasMany('tags');
         });
 });
+
+JsonApiRoute::server('v1')
+    ->namespace('Api')
+    ->resources(function ($server) {
+        $server->resource('students', StudentController::class);
+        $server->resource('institutes', InstituteController::class);
+        $server->resource('users', UserController::class);
+        $server->resource('sessions', SessionController::class);
+        $server->resource('guardians', GuardianController::class);
+        $server->resource('grades');
+        $server->resource('batches')
+            ->actions(function ($actions) {
+                // $actions->withId()->get('customers');
+                // $actions->withId()->get('webhooks');
+                // $actions->withId()->post('update');
+            });
+    });

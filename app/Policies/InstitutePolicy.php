@@ -16,7 +16,7 @@ class InstitutePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(?User $user)
+    public function viewAny(User $user)
     {
         return true;
     }
@@ -51,8 +51,12 @@ class InstitutePolicy
      * @param  \App\Models\Institute  $institute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Institute $institute)
+    public function update(User $user, $data = null)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return true;
     }
 
@@ -63,9 +67,11 @@ class InstitutePolicy
      * @param  \App\Models\Institute  $institute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Institute $institute)
+    public function delete(User $user, $data = null)
     {
-        return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
     }
 
     /**
