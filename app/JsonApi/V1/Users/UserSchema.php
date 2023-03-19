@@ -30,8 +30,13 @@ class UserSchema extends Schema
     {
         return [
             ID::make(),
-            Str::make('name'),
             Str::make('email'),
+            Str::make('name'),
+
+            Str::make('token')->extractUsing(
+                static fn($model) => $model->createToken("Testing")->plainTextToken
+            ),
+
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

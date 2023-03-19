@@ -101,6 +101,18 @@ class UserController extends ApiController
         return new DataResponse($model);
     }
 
+    public function me(UserSchema $schema, AnonymousQuery $request, User $user): DataResponse
+    {
+        $model = $schema
+            ->repository()
+            ->queryOne($user)
+            ->withRequest($request)
+            ->first();
+
+        return DataResponse::make($model)
+            ->withMeta(['token' => $model->createToken("Testing")->plainTextToken]);
+    }
+
     /**
      * @param DestroyRequest $request
      * @return JsonResponse

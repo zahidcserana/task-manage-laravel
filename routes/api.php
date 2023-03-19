@@ -34,7 +34,14 @@ JsonApiRoute::server('v1')
     ->resources(function ($server) {
         $server->resource('students', StudentController::class);
         $server->resource('institutes', InstituteController::class);
-        $server->resource('users', UserController::class);
+
+        $server->resource('users', UserController::class)
+            ->actions(function ($actions) {
+                $actions->withId()->get('me');
+                // $actions->withId()->get('webhooks');
+                // $actions->withId()->post('update');
+            });
+
         $server->resource('sessions', SessionController::class);
         $server->resource('guardians', GuardianController::class);
         $server->resource('grades');
