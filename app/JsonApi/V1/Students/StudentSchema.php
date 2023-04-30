@@ -37,7 +37,7 @@ class StudentSchema extends Schema
             Str::make('mobile'),
             Str::make('address'),
             Str::make('remarks'),
-            BelongsTo::make('grade'),
+            BelongsTo::make('batch'),
             BelongsTo::make('guardian'),
             BelongsTo::make('institute'),
 

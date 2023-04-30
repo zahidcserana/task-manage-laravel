@@ -22,9 +22,9 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->string('number')->nullable();
 
-            $table->foreignId('institute_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
-            $table->foreignId('grade_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
-            $table->foreignId('guardian_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate()->nullable();
+            $table->foreignId('institute_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('batch_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('guardian_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
             $table->softDeletes();

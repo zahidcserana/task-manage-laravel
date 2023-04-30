@@ -201,6 +201,7 @@ return [
         \App\Providers\UserComponentServiceProvider::class,
         \App\Providers\SessionComponentServiceProvider::class,
         \App\Providers\InstituteComponentServiceProvider::class,
+        \App\Providers\AdmissionComponentServiceProvider::class,
 
     ],
 

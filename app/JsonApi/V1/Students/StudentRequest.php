@@ -23,7 +23,7 @@ class StudentRequest extends ResourceRequest
             'address' => ['nullable', 'string'],
             'remarks' => ['nullable', 'string'],
             'institute' => JsonApiRule::toOne(),
-            'grade' => JsonApiRule::toOne(),
+            'batch' => JsonApiRule::toOne(),
             'guardian' => JsonApiRule::toOne(),
         ];
     }

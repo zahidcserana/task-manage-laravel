@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Model
@@ -21,7 +22,7 @@ class Student extends Model
         'address',
         'phone',
         'established_at',
-        'grade_id',
+        'batch_id',
         'guardian_id',
     ];
 
@@ -30,13 +31,18 @@ class Student extends Model
         return $this->belongsTo(Institute::class);
     }
 
-    public function grade(): BelongsTo
+    public function batch(): BelongsTo
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Batch::class);
     }
 
     public function guardian(): BelongsTo
     {
         return $this->belongsTo(Guardian::class);
+    }
+
+    public function admissions(): HasMany
+    {
+        return $this->hasMany(Admission::class);
     }
 }

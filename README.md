@@ -37,10 +37,11 @@ php artisan migrate
 - Grade
 - Institute
 - Guardian
--## Session
--## Batch(SessionGrade)
+- Session
+- Batch(SessionGrade)
 - Student(Batch)
 -## InstituteUser
+-## Admission
 
 
 ## Current

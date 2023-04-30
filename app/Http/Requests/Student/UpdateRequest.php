@@ -13,9 +13,9 @@ class UpdateRequest extends FormRequest
                 'required',
                 'exists:students,id,deleted_at,NULL'
             ],
-            'grade_id' => [
-                'required',
-                'exists:grades,id'
+            'batch_id' => [
+                'sometimes',
+                'exists:batches,id'
             ],
             'name' => [
                 'required'

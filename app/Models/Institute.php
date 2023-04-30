@@ -37,4 +37,9 @@ class Institute extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function admissions(): HasMany
+    {
+        return $this->hasMany(Admission::class);
+    }
 }

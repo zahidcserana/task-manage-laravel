@@ -75,6 +75,7 @@ class Server extends BaseServer
             Students\StudentSchema::class,
             Sessions\SessionSchema::class,
             Batches\BatchSchema::class,
+            Admissions\AdmissionSchema::class,
         ];
     }
 }

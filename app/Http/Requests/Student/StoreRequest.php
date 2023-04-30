@@ -4,6 +4,7 @@ namespace App\Http\Requests\Student;
 
 use App\Http\Requests\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
 
 class StoreRequest extends FormRequest
 {
@@ -14,9 +15,9 @@ class StoreRequest extends FormRequest
                 'sometimes',
                 'exists:institutes,id'
             ],
-            'grade_id' => [
-                'required',
-                'exists:grades,id'
+            'batch_id' => [
+                'sometimes',
+                'exists:batches,id'
             ],
             'guardian_id' => [
                 'sometimes',

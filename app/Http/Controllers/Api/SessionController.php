@@ -42,7 +42,6 @@ class SessionController extends ApiController
             $instituteIds = Institute::where('id', $request->institute_id)->pluck('id')->toArray();
         }
 
-
         $models = $schema
             ->repository()
             ->queryAll()

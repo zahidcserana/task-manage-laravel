@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\ApiController;
 use App\Models\Institute;
 use LaravelJsonApi\Core\Responses\DataResponse;
+use LaravelJsonApi\Core\Responses\RelatedResponse;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchOne;
 use LaravelJsonApi\Laravel\Http\Requests\AnonymousCollectionQuery;
 use LaravelJsonApi\Contracts\Routing\Route;
@@ -114,5 +115,25 @@ class BatchController extends ApiController
         return response()->json(
             $this->fail('Something went wrong!')
         );
+    }
+
+    public function showRelatedSession(BatchSchema $schema, Batch $batch)
+    {
+      $session = $schema
+        ->repository()
+        ->queryToOne($batch, 'session')
+        ->first();
+
+      return new RelatedResponse($batch, 'session', $session);
+    }
+
+    public function showRelatedGrade(BatchSchema $schema, Batch $batch)
+    {
+      $grade = $schema
+        ->repository()
+        ->queryToOne($batch, 'grade')
+        ->first();
+
+      return new RelatedResponse($batch, 'grade', $grade);
     }
 }

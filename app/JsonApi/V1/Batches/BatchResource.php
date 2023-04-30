@@ -19,6 +19,9 @@ class BatchResource extends JsonApiResource
         return [
             'fee' => $this->fee,
             'total_student' => $this->total_student,
+            'institute' => $this->institute,
+            'session' => $this->session,
+            'grade' => $this->grade,
         ];
     }
 

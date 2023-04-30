@@ -32,23 +32,24 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
 JsonApiRoute::server('v1')
     ->namespace('Api')
     ->resources(function ($server) {
-        $server->resource('students', StudentController::class);
         $server->resource('institutes', InstituteController::class);
+        $server->resource('guardians', GuardianController::class);
+        $server->resource('students', StudentController::class);
+        $server->resource('sessions', SessionController::class);
+        $server->resource('grades');
 
         $server->resource('users', UserController::class)
             ->actions(function ($actions) {
                 $actions->withId()->get('me');
-                // $actions->withId()->get('webhooks');
-                // $actions->withId()->post('update');
-            });
+        });
+        
+        $server->resource('batches')->relationships(function ($relationships) {
+            $relationships->hasOne('session')->ownAction('related');
+            $relationships->hasOne('grade')->ownAction('related');
+        });
 
-        $server->resource('sessions', SessionController::class);
-        $server->resource('guardians', GuardianController::class);
-        $server->resource('grades');
-        $server->resource('batches')
-            ->actions(function ($actions) {
-                // $actions->withId()->get('customers');
-                // $actions->withId()->get('webhooks');
-                // $actions->withId()->post('update');
-            });
+        $server->resource('admissions')->relationships(function ($relationships) {
+            $relationships->hasOne('batch')->ownAction('related');
+            $relationships->hasOne('student')->ownAction('related');
+        });
     });
